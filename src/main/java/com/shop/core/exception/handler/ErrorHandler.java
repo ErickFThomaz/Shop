@@ -30,12 +30,6 @@ public class ErrorHandler {
 
 	private final static Logger logger = LoggerFactory.getLogger(ErrorHandler.class);
 
-	private static final String CONTENT_TYPE = "Content-Type";
-
-	private static final String APPLICATION_JSON_CHARSET_UTF_8 = "application/json; charset=utf-8";
-
-	private static final String ERROR = "error";
-
 	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
 	public HttpEntity<Object> handlerValidationException(MethodArgumentTypeMismatchException ex) {
 		logger.error("", ex);
@@ -74,7 +68,7 @@ public class ErrorHandler {
 
 	private ResponseEntity<Object> buildResponseEntity(ApiError apiError) {
 		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add(CONTENT_TYPE, APPLICATION_JSON_CHARSET_UTF_8);
+		responseHeaders.add("Content-Type", "application/json; charset=utf-8");
 		return new ResponseEntity<>(apiError, responseHeaders, apiError.getStatus());
 	}
 

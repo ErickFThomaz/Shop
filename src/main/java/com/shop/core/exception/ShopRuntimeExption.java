@@ -1,13 +1,13 @@
 package com.shop.core.exception;
 
+import lombok.Getter;
+
+@Getter
 public class ShopRuntimeExption extends RuntimeException {
 
-	private String notification;
+	private final String notification;
 
-	private Integer errorCode;
-
-	public ShopRuntimeExption() {
-	}
+	private final Integer errorCode;
 
 	public ShopRuntimeExption(String notification, Integer errorCode) {
 		super(new Throwable(notification));
