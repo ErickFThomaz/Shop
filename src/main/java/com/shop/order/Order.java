@@ -1,10 +1,10 @@
 package com.shop.order;
 
+import com.shop.carrier.Carrier;
 import com.shop.core.AbstractEntity;
+import com.shop.payment.Payment;
 import com.shop.product.Product;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.hateoas.server.core.Relation;
 
@@ -28,18 +28,20 @@ public class Order extends AbstractEntity<Order> {
 	@Builder.Default
 	private String id = UUID.randomUUID().toString();
 
+	//todo: Criar enum para status da ordem de pedido
 	private String status;
 
-	// todo Objeto de pagamentos(Metodo de pagamento, valor total, data de vencimento, se
-	// foi pago, desconto)
-	private String payment;
+	@ManyToOne
+	private Payment payment;
 
-	// todo Objeto de transportadora(Nome, Cidade de origem, Cidade de destino, código de
-	// rastreio)
-	private String transportadora;
+	private String trackingCode;
 
-	// todo Criar vinculo com os produtos
+	@ManyToOne
+	@JoinColumn(name = "carrierId", referencedColumnName = "id")
+	private Carrier carrier;
+
 	@OneToMany
+	@JoinColumn(name = "productId", referencedColumnName = "id")
 	private List<Product> product;
 
 	@Builder.Default
