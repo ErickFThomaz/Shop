@@ -1,6 +1,6 @@
 package com.shop.carrier;
 
-import com.shop.core.AbstractEntity;
+import com.shop.core.AuditableEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotEmpty;
@@ -20,7 +20,7 @@ import static lombok.AccessLevel.PRIVATE;
 @NoArgsConstructor(access = PACKAGE)
 @AllArgsConstructor(access = PRIVATE)
 @Relation(value = "carrier", collectionRelation = "carriers")
-public class Carrier extends AbstractEntity<Carrier> {
+public class Carrier extends AuditableEntity {
 
     @Id
     @Builder.Default

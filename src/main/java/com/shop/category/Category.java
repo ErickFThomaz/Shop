@@ -1,6 +1,6 @@
 package com.shop.category;
 
-import com.shop.core.AbstractEntity;
+import com.shop.core.AuditableEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -19,7 +19,7 @@ import static lombok.AccessLevel.PRIVATE;
 @NoArgsConstructor(access = PACKAGE)
 @AllArgsConstructor(access = PRIVATE)
 @Relation(value = "category", collectionRelation = "categories")
-public class Category extends AbstractEntity<Category> {
+public class Category extends AuditableEntity {
 
 	@Id
 	@Builder.Default

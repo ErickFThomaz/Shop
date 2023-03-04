@@ -1,7 +1,7 @@
 package com.shop.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.shop.core.AbstractEntity;
+import com.shop.core.AuditableEntity;
 import com.shop.user.web.UserResource;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -23,7 +23,7 @@ import static lombok.AccessLevel.PRIVATE;
 @NoArgsConstructor(access = PACKAGE)
 @AllArgsConstructor(access = PRIVATE)
 @Relation(value = "user", collectionRelation = "users")
-public class User extends AbstractEntity<User> {
+public class User extends AuditableEntity {
 
 	@Id
 	@Email

@@ -1,7 +1,7 @@
 package com.shop.order;
 
 import com.shop.carrier.Carrier;
-import com.shop.core.AbstractEntity;
+import com.shop.core.AuditableEntity;
 import com.shop.payment.Payment;
 import com.shop.product.Product;
 import jakarta.persistence.*;
@@ -22,16 +22,17 @@ import static lombok.AccessLevel.PRIVATE;
 @NoArgsConstructor(access = PACKAGE)
 @AllArgsConstructor(access = PRIVATE)
 @Relation(value = "order", collectionRelation = "orders")
-public class Order extends AbstractEntity<Order> {
+public class Order extends AuditableEntity {
 
 	@Id
 	@Builder.Default
 	private String id = UUID.randomUUID().toString();
 
-	//todo: Criar enum para status da ordem de pedido
-	private String status;
+	@Enumerated(EnumType.STRING)
+	private OrderStatus status;
 
 	@ManyToOne
+	@JoinColumn(name = "paymentId", referencedColumnName = "id")
 	private Payment payment;
 
 	private String trackingCode;

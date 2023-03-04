@@ -1,0 +1,6 @@
+package com.shop.payment;
+
+public enum PaymentStatus {
+
+    CREATED, WAITING_PAYMENT, IN_PROCESS, IN_MEDIATION, APPROVED, REJECTED, REFAUND, AUTHORIZED, CANCELLED
+}

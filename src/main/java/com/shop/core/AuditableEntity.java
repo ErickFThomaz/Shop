@@ -22,7 +22,7 @@ import java.time.Instant;
 @EqualsAndHashCode
 @JsonIgnoreProperties(allowGetters = true)
 @EntityListeners({ AuditingEntityListener.class })
-public abstract class AbstractEntity<T> implements Serializable {
+public abstract class AuditableEntity implements Serializable {
 
 	@CreatedDate
 	private Instant createdAt;

@@ -1,7 +1,7 @@
 package com.shop.system.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.shop.core.AbstractEntity;
+import com.shop.core.AuditableEntity;
 import com.shop.user.User;
 import com.shop.user.UserStatus;
 import com.shop.user.UserType;
@@ -21,7 +21,7 @@ import java.util.List;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class UserDetails extends AbstractEntity<User>
+public class UserDetails extends AuditableEntity
 		implements org.springframework.security.core.userdetails.UserDetails {
 
 	private String username;

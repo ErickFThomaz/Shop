@@ -1,7 +1,7 @@
 package com.shop.product;
 
 import com.shop.category.Category;
-import com.shop.core.AbstractEntity;
+import com.shop.core.AuditableEntity;
 import com.shop.user.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -24,7 +24,7 @@ import static lombok.AccessLevel.PRIVATE;
 @NoArgsConstructor(access = PACKAGE)
 @AllArgsConstructor(access = PRIVATE)
 @Relation(value = "product", collectionRelation = "products")
-public class Product extends AbstractEntity<Product> {
+public class Product extends AuditableEntity {
 
 	@Id
 	@Builder.Default
