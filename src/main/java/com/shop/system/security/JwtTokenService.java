@@ -17,13 +17,13 @@ import java.time.Instant;
 @Service
 public class JwtTokenService {
 
-	private final static Logger logger = LoggerFactory.getLogger(JwtTokenService.class);
-
-	private static final Duration JWT_TOKEN_VALIDITY = Duration.ofHours(12);
-
 	private final Algorithm hmac512;
 
 	private final JWTVerifier verifier;
+
+	private static final Logger logger = LoggerFactory.getLogger(JwtTokenService.class);
+
+	private static final Duration JWT_TOKEN_VALIDITY = Duration.ofHours(12);
 
 	public JwtTokenService(@Value("${jwt.secret}") final String secret) {
 		this.hmac512 = Algorithm.HMAC512(secret);
@@ -31,10 +31,10 @@ public class JwtTokenService {
 	}
 
 	public AuthenticationResponse generateToken(final UserDetails userDetails) {
-		final Instant exprires = Instant.now().plusMillis(JWT_TOKEN_VALIDITY.toMillis());
-		String acessToken = JWT.create().withSubject(userDetails.getUsername()).withIssuer("app")
-				.withIssuedAt(Instant.now()).withExpiresAt(exprires).sign(this.hmac512);
-		return AuthenticationResponse.of(acessToken, exprires);
+		final Instant expires = Instant.now().plusMillis(JWT_TOKEN_VALIDITY.toMillis());
+		String accessToken = JWT.create().withSubject(userDetails.getUsername()).withIssuer("app")
+				.withIssuedAt(Instant.now()).withExpiresAt(expires).sign(this.hmac512);
+		return AuthenticationResponse.of(accessToken, expires);
 	}
 
 	public String validateTokenAndGetUsername(final String token) {
@@ -42,7 +42,7 @@ public class JwtTokenService {
 			return verifier.verify(token).getSubject();
 		}
 		catch (final JWTVerificationException verificationEx) {
-			logger.warn("token invalid: {}", verificationEx.getMessage());
+			logger.warn("Token invalid: {}", verificationEx.getMessage());
 			return null;
 		}
 	}

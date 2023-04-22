@@ -21,8 +21,7 @@ import java.util.List;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class UserDetails extends AuditableEntity
-		implements org.springframework.security.core.userdetails.UserDetails {
+public class UserDetails extends AuditableEntity implements org.springframework.security.core.userdetails.UserDetails {
 
 	private String username;
 
@@ -82,7 +81,7 @@ public class UserDetails extends AuditableEntity
 
 	@Override
 	public boolean isAccountNonLocked() {
-		return true;
+		return status != UserStatus.BLOCKED;
 	}
 
 	@Override

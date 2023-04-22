@@ -13,10 +13,10 @@ public class AuthenticationResponse {
 
 	private String accessToken;
 
-	private Instant expriesIn;
+	private Instant expiresIn;
 
-	public static AuthenticationResponse of(String accessToken, Instant expriesIn) {
-		return AuthenticationResponse.builder().accessToken(accessToken).expriesIn(expriesIn).build();
+	public static AuthenticationResponse of(String accessToken, Instant expiresIn) {
+		return AuthenticationResponse.builder().accessToken(accessToken).expiresIn(expiresIn).build();
 	}
 
 }

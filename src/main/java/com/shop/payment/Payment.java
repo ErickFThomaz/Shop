@@ -11,7 +11,6 @@ import org.springframework.hateoas.server.core.Relation;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 import static lombok.AccessLevel.PACKAGE;
 import static lombok.AccessLevel.PRIVATE;
@@ -26,21 +25,22 @@ import static lombok.AccessLevel.PRIVATE;
 @Relation(value = "payment", collectionRelation = "payments")
 public class Payment extends AuditableEntity {
 
-    @Id
-    @Builder.Default
-    private String id = UUID.randomUUID().toString();
+	@Id
+	private String id;
 
-    private String status;
+	private String status;
 
-    @Enumerated(EnumType.STRING)
-    private PaymentMethod method;
+	@Enumerated(EnumType.STRING)
+	private PaymentMethod method;
 
-    private BigDecimal value;
+	private BigDecimal value;
 
-    private BigDecimal paidValue;
+	private BigDecimal paidValue;
 
-    private LocalDateTime dueDate;
+	private LocalDateTime dueDate;
 
-    private BigDecimal discount;
+	private BigDecimal discount;
+
+	private String fileName;
 
 }

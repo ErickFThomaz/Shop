@@ -10,7 +10,7 @@ public class ShopRuntimeExption extends RuntimeException {
 	private final Integer errorCode;
 
 	public ShopRuntimeExption(String notification, Integer errorCode) {
-		super(new Throwable(notification));
+		super(notification);
 		this.notification = notification;
 		this.errorCode = errorCode;
 	}

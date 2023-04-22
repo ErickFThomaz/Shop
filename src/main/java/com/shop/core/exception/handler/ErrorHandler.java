@@ -1,6 +1,8 @@
 package com.shop.core.exception.handler;
 
 import com.shop.core.ShopMessageSource;
+import com.shop.core.exception.BadCredentialsException;
+import com.shop.core.exception.UserConflictException;
 import com.shop.core.exception.resource.ApiError;
 import com.shop.core.exception.resource.ApiValidationError;
 import jakarta.validation.ConstraintViolation;
@@ -18,8 +20,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.http.HttpStatus.*;
 
 @Order(1)
 @RestControllerAdvice
@@ -28,13 +29,25 @@ public class ErrorHandler {
 
 	private final ShopMessageSource messageSource;
 
-	private final static Logger logger = LoggerFactory.getLogger(ErrorHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(ErrorHandler.class);
 
 	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
 	public HttpEntity<Object> handlerValidationException(MethodArgumentTypeMismatchException ex) {
 		logger.error("", ex);
 		return buildResponseEntity(new ApiError(BAD_REQUEST,
 				"Invalid parameter: " + ex.getParameter().getParameterName() + " with value: " + ex.getValue(), ex));
+	}
+
+	@ExceptionHandler(BadCredentialsException.class)
+	public HttpEntity<Object> handleBadCredentialsException(BadCredentialsException ex){
+		logger.error("", ex);
+		return buildResponseEntity(new ApiError(UNAUTHORIZED, ex.getMessage(), ex));
+	}
+
+	@ExceptionHandler(UserConflictException.class)
+	public HttpEntity<Object> handleUserConflictException(UserConflictException ex){
+		logger.error("", ex);
+		return buildResponseEntity(new ApiError(CONFLICT, ex.getMessage(), ex));
 	}
 
 	@ExceptionHandler({ ConstraintViolationException.class })

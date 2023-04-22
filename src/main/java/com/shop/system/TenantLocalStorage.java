@@ -2,14 +2,14 @@ package com.shop.system;
 
 public class TenantLocalStorage {
 
-	private static ThreadLocal<String> tenant = new ThreadLocal<>();
+	private static final ThreadLocal<String> TENANT = new ThreadLocal<>();
 
 	public static void setTenantName(String tenantName) {
-		tenant.set(tenantName);
+		TENANT.set(tenantName);
 	}
 
 	public static String getTenantName() {
-		return tenant.get();
+		return TENANT.get();
 	}
 
 }

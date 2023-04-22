@@ -2,16 +2,11 @@ package com.shop.product;
 
 import com.shop.category.Category;
 import com.shop.core.AuditableEntity;
-import com.shop.user.User;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.hateoas.server.core.Relation;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 import static lombok.AccessLevel.PACKAGE;
 import static lombok.AccessLevel.PRIVATE;
@@ -27,8 +22,8 @@ import static lombok.AccessLevel.PRIVATE;
 public class Product extends AuditableEntity {
 
 	@Id
-	@Builder.Default
-	private String id = UUID.randomUUID().toString();
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
 	private String name;
 
@@ -44,7 +39,6 @@ public class Product extends AuditableEntity {
 	@JoinColumn(name = "categoryId", referencedColumnName = "id")
 	private Category category;
 
-	@ManyToOne
-	private User user;
+	private String shopId;
 
 }

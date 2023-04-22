@@ -11,7 +11,7 @@ public class TenantConfiguration {
 
 	@Bean
 	public FilterRegistrationBean<TenantFilter> dawsonApiFilter() {
-		FilterRegistrationBean<TenantFilter> registration = new FilterRegistrationBean();
+		FilterRegistrationBean<TenantFilter> registration = new FilterRegistrationBean<>();
 		registration.setFilter(new TenantFilter());
 		return registration;
 	}

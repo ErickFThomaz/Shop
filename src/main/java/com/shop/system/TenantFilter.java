@@ -9,7 +9,7 @@ import org.springframework.web.filter.GenericFilterBean;
 
 import java.io.IOException;
 
-import static org.springframework.util.StringUtils.isEmpty;
+import static org.springframework.util.StringUtils.hasText;
 
 public class TenantFilter extends GenericFilterBean {
 
@@ -18,7 +18,7 @@ public class TenantFilter extends GenericFilterBean {
 			throws IOException, ServletException {
 		HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
 		String tenantId = httpServletRequest.getHeader("TENANT");
-		if (isEmpty(tenantId)) {
+		if (!hasText(tenantId)) {
 			TenantLocalStorage.setTenantName("loja1".toUpperCase());
 		}
 		else {

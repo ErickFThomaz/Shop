@@ -17,7 +17,7 @@ public class UserCommand {
 
 	public User create(User user) {
 		repository.findById(user.getUsername()).ifPresent(user1 -> {
-			throw new UserConflictException(source.getMessage("user.exists.conflict"));
+			throw new UserConflictException(source.getMessage("user.conflict"));
 		});
 
 		// todo:disparo de email para ativação.

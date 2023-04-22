@@ -33,14 +33,12 @@ public class UserRestService {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<User> create(@RequestBody @Valid UserResource user) {
-		System.out.println(messageSource.getMessage("validation.error"));
 		return ResponseEntity.ok(command.create(User.of(user)));
 	}
 
 	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
-	public PagedModel<EntityModel<User>> findAll(
-			@SortDefault.SortDefaults({ @SortDefault(sort = "createdAt", direction = DESC) }) Pageable pageable) {
+	public PagedModel<EntityModel<User>> findAll(@SortDefault(sort = "createdAt", direction = DESC) Pageable pageable) {
 		return pagedResourcesAssembler.toModel(userQuery.findAll(pageable));
 	}
 

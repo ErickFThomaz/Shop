@@ -22,21 +22,21 @@ import static lombok.AccessLevel.PRIVATE;
 @Relation(value = "carrier", collectionRelation = "carriers")
 public class Carrier extends AuditableEntity {
 
-    @Id
-    @Builder.Default
-    private String id = UUID.randomUUID().toString();
+	@Id
+	@Builder.Default
+	private String id = UUID.randomUUID().toString();
 
-    private String externalId;
+	private String externalId;
 
-    @NotEmpty
-    private String name;
+	@NotEmpty
+	private String name;
 
-    private String street;
+	private String street;
 
-    private String city;
+	private String city;
 
-    private String state;
+	private String state;
 
-    private String site;
+	private String site;
 
 }

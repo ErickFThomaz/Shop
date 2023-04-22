@@ -27,6 +27,4 @@ public class Category extends AuditableEntity {
 
 	private String name;
 
-	private String description;
-
 }
